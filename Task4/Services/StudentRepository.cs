@@ -39,6 +39,9 @@ namespace Task4.Services
 
         public void Update(Student item)
         {
+
+
+
             using (var connection = new SqlConnection())
             {
                 connection.Execute("Update Players SET Name=@PName,Score=@PScore,IsStar=@PIsStar where Id=@PId",
