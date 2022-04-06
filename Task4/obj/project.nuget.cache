@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "rd+CzmbB17S9z1x5Ss9/ZU8xHHCz7IL5y2I4uinfMPhgQa6Ocx+fzUO7ScKKDmH4pLpn36OfLubVA+B4z9mMLw==",
+  "dgSpecHash": "FmyU/WLrnAbNQlppEXjTRpk6MMls0RPzaH/06X2j6nASdN82S5zEjY01Qdmtb83E+zUI+kDsg6rbPj1RgheuSw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Haci_sx81\\Desktop\\ASP_NET_T4\\Task4\\Task4.csproj",
   "expectedPackageFiles": [
@@ -77,7 +77,7 @@
     "C:\\Users\\Haci_sx81\\.nuget\\packages\\system.composition.runtime\\1.0.31\\system.composition.runtime.1.0.31.nupkg.sha512",
     "C:\\Users\\Haci_sx81\\.nuget\\packages\\system.composition.typedparts\\1.0.31\\system.composition.typedparts.1.0.31.nupkg.sha512",
     "C:\\Users\\Haci_sx81\\.nuget\\packages\\system.configuration.configurationmanager\\4.7.0\\system.configuration.configurationmanager.4.7.0.nupkg.sha512",
-    "C:\\Users\\Haci_sx81\\.nuget\\packages\\system.data.sqlclient\\4.8.1\\system.data.sqlclient.4.8.1.nupkg.sha512",
+    "C:\\Users\\Haci_sx81\\.nuget\\packages\\system.data.sqlclient\\4.8.3\\system.data.sqlclient.4.8.3.nupkg.sha512",
     "C:\\Users\\Haci_sx81\\.nuget\\packages\\system.diagnostics.debug\\4.3.0\\system.diagnostics.debug.4.3.0.nupkg.sha512",
     "C:\\Users\\Haci_sx81\\.nuget\\packages\\system.diagnostics.diagnosticsource\\5.0.0\\system.diagnostics.diagnosticsource.5.0.0.nupkg.sha512",
     "C:\\Users\\Haci_sx81\\.nuget\\packages\\system.diagnostics.tools\\4.3.0\\system.diagnostics.tools.4.3.0.nupkg.sha512",
