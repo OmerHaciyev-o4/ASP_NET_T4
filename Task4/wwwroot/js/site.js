@@ -2,3 +2,8 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+
+var previewImg = function (event) {
+    var result = document.getElementById("mainImg");
+    result.src = URL.createObjectURL(event.target.files[0]);
+}
