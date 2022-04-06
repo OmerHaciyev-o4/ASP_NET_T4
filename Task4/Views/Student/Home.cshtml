@@ -1,0 +1,28 @@
+﻿@using Task4.Entities
+<div class="w-100 d-flex flex-row bg-dark">
+    <div class="w-25 h-100 bg-dark" style="overflow-y: scroll;">
+        <ul class="h3" style="list-style: none;">
+            @foreach (Student student in ViewBag.Students)
+            {
+                <li class="mt-4 mb-4"><a class="text-decoration-none text-light" asp-controller="Student" asp-action="Details" asp-route-info="@student.ID">@student.Name</a></li>
+            }
+        </ul>
+    </div>
+    <div class="w-75 h-100 bg-light">
+        @foreach (Student student in ViewBag.Students)
+        {
+            <div class="w-100 h-25 d-flex flex-row flex-wrap mt-3 mb-3">
+                <div class="w-25 h-100 ms-3">
+                    <img class="m-0" style="width: 85%; height: 28vh; border-radius: 50%;" src="~/images/@(student.URL)"/>
+                </div>
+                <div class="w-50 h-100 mt-3 float-left">
+                    <h4><b>ID:</b> @student.ID</h4>
+                    <h4><b>Name:</b> @student.Name</h4>
+                    <h4><b>Surname:</b> @student.Surname</h4>
+                    <h4><b>Age:</b> @student.Age</h4>
+                </div>
+            </div>
+            <hr class="m-0 p-0" />
+        }
+    </div>
+</div>
