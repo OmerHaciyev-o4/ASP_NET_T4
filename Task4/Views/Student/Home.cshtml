@@ -4,7 +4,7 @@
         <ul class="h3" style="list-style: none;">
             @foreach (Student student in ViewBag.Students)
             {
-                <li class="mt-4 mb-4"><a class="text-decoration-none text-light" asp-controller="Student" asp-action="Edit" asp-route-info="@student.ID">@student.Name</a></li>
+                <li class="mt-4 mb-4"><a class="text-decoration-none text-light" asp-controller="Student" asp-action="Edit" asp-route-info="@student.Id">@student.Name</a></li>
             }
         </ul>
     </div>
@@ -13,16 +13,16 @@
         {
             <div class="w-100 h-25 d-flex flex-row flex-wrap mt-3 mb-3">
                 <div class="w-25 h-100 ms-3">
-                    <img class="m-0 rounded-circle" style="width: 95%; height: 28vh;" src="~/images/@(student.URL)"/>
+                    <img class="m-0 rounded-circle" style="width: 95%; height: 28vh;" src="~/images/@(student.Url)"/>
                 </div>
                 <div class="w-50 h-100 mt-3 float-left">
-                    <h4><b>ID:</b> @student.ID</h4>
+                    <h4><b>ID:</b> @student.Id</h4>
                     <h4><b>Name:</b> @student.Name</h4>
                     <h4><b>Surname:</b> @student.Surname</h4>
                     <h4><b>Age:</b> @student.Age</h4>
                     <div class="w-100">
-                        <a class="h5 text-decoration-none" asp-action="Edit" asp-controller="Student" asp-route-info="@student.ID">Edit</a>
-                        <a class="h5 text-decoration-none" asp-action="Delete" asp-controller="Student" asp-route-info="@student.ID">Delete</a>
+                        <a class="h5 text-decoration-none" asp-action="Edit" asp-controller="Student" asp-route-info="@student.Id">Edit</a>
+                        <a class="h5 text-decoration-none" asp-action="Delete" asp-controller="Student" asp-route-info="@student.Id">Delete</a>
                     </div>
                 </div>
             </div>

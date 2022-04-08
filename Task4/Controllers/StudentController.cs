@@ -1,88 +1,63 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.IO;
 using Task4.Entities;
 using Task4.Helpers;
+using Task4.Models;
 using Task4.Repos;
+using Task4.Services;
 
 namespace Task4.Controllers
 {
     public class StudentController : Controller
     {
-        public StudentController(IWebHostEnvironment webHost)
+        private IRepository _repository;
+        public StudentController(IWebHostEnvironment webHost, IRepository repository)
         {
+            _repository = repository;
             StudentRepo.WebHost = webHost;
         }
 
         public IActionResult Home()
         {
-            ViewBag.Students = StudentRepo.Students;
+            ViewBag.Students = _repository.GetAll();
             return View();
         }
 
         public IActionResult Delete(string info = null)
         {
-            int id = -1;
-            if (info != null)
-                id = Convert.ToInt32(info);
-            else
-                return RedirectToAction("home");
+            Student student = _repository.Get(Convert.ToInt32(info));
+            System.IO.File.Delete(Path.Combine(StudentRepo.WebHost.WebRootPath, "images", student.Url));
+            _repository.Delete(Convert.ToInt32(info));
+            ViewBag.Students = _repository.GetAll();
 
-            Student deletedStudent = null;
-            foreach (var student in StudentRepo.Students)
-            {
-                if (student.ID == id)
-                {
-                    deletedStudent = student;
-                    break;
-                }
-            }
-
-            StudentRepo.Students.Remove(deletedStudent);
             return RedirectToAction("home");
         }
 
         [HttpGet]
         public IActionResult Edit(string info = null)
         {
-            try
-            {
-                int id = Convert.ToInt32(info);
-                foreach (var student in StudentRepo.Students)
-                {
-                    if (student.ID == id)
-                    {
-                        ViewBag.EditStudent = student;
-                        break;
-                    }
-                }
-                return View();
-            }
-            catch (Exception)
-            {
-                return RedirectToAction("home");
-            }
+            int Id = Convert.ToInt32(info);
+            ViewBag.EditStudent = _repository.Get(Id);
+            StudentRepo.TempImgUrl = _repository.Get(Id).Url;
+            return View();
         }
         [HttpPost]
-        public IActionResult Edit(Student student)
+        public IActionResult Edit(StudentViewModel model)
         {
-            int id = student.ID;
-            Student mainStudent = null;
-            foreach (var tempStudent in StudentRepo.Students)
-            {
-                if (tempStudent.ID == id)
-                {
-                    mainStudent = student;
-                    break;
-                }
-            }
-            string imgURL = null;
-            if (student.File != null)
+            if (model.File != null)
             {
                 var helper = new ImageHelper(StudentRepo.WebHost);
-                imgURL = helper.GetURL(student.File, student.ID);
+                model.Student.Url = helper.GetURL(model.File, model.Student.Id);
             }
-            mainStudent.Update(student.Name, student.Surname, student.Age, imgURL);
+            else
+            {
+                model.Student.Url = StudentRepo.TempImgUrl;
+            }
+
+            _repository.Update(model.Student);
+            ViewBag.Students = _repository.GetAll();
 
             return RedirectToAction("home");
         }
@@ -93,12 +68,15 @@ namespace Task4.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Student student)
+        public IActionResult Create(StudentViewModel model)
         {
-            student.ID = StudentRepo.Students.Count + 1;
-            Student createdStudent = new Student();
-            createdStudent.Create(student);
-            StudentRepo.Students.Add(createdStudent);
+            if (model.File != null)
+            {
+                var helper = new ImageHelper(StudentRepo.WebHost);
+                model.Student.Url = helper.GetURL(model.File, model.Student.Id);
+            }
+            _repository.Add(model.Student);
+            ViewBag.Students = _repository.GetAll();
 
             return RedirectToAction("home");
         }

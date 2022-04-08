@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 namespace Task4.Services
 {
@@ -16,38 +17,33 @@ namespace Task4.Services
             _context = context;
         }
 
-        public void Add(Student item)
+        public void Add(Student student)
         {
-            _context.Students.Add(item);
+            _context.Students.Add(student);
             _context.SaveChanges();
         }
 
         public void Delete(int id)
         {
-
+            var student = _context.Students.FirstOrDefault(s => s.Id == id);
+            _context.Entry(student).State = EntityState.Deleted;
+            _context.SaveChanges();
         }
 
         public Student Get(int id)
         {
-            throw new NotImplementedException();
+            return _context.Students.FirstOrDefault(s => s.Id == id);
         }
 
         public IEnumerable<Student> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Students;
         }
 
-        public void Update(Student item)
+        public void Update(Student student)
         {
-
-
-
-            using (var connection = new SqlConnection())
-            {
-                connection.Execute("Update Players SET Name=@PName,Score=@PScore,IsStar=@PIsStar where Id=@PId",
-                    new { PId = player.Id, PName = player.Name, PScore = player.Score, PIsStar = player.IsStar });
-
-            }
+            _context.Entry(student).State = EntityState.Modified;
+            _context.SaveChanges();
         }
     }
 }
